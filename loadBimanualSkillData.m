@@ -24,7 +24,7 @@ for subj = 1:Nsubj
 
     % split into jump types - save this into a different data structure d
     disp('    Splitting data by jump type...')
-        d{subj}.Bi = splitDatabyJump(data.Bi);
+        d.Bi{subj} = splitDatabyJump(data.Bi);
         %d{subj}.Uni = splitDatabyJump(data.Uni);
 
     % store no jump trials in a separate data structure to store separately
@@ -35,6 +35,9 @@ for subj = 1:Nsubj
     save(fname,'data')
 end
     
+d_full = d;
+d.Bi = compactify_data(d_full.Bi);
 
-save BimanualSkillData d %Uni_nojmp
+save BimanualSkillData d_full %Uni_nojmp
+save Bimanual_compact d
 disp('All Done')
